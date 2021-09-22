@@ -7,9 +7,7 @@ spec:
   selector:
     matchLabels:
       app: kafka-consumer-app
-  replicas: {{.Values.replicaCount}}
-  strategy:
-    type: Recreate
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
@@ -18,8 +16,4 @@ spec:
       containers:
         - name: kafka-consumer
           image: docker.io/youngjaikwon/kafka-consumer:test1
-          imagePullPolicy: {{.Values.image.pullPolicy}}
-          resources:
-            requests:
-              cpu: {{.Values.resources.requests.cpu}}
-              memory: {{.Values.resources.requests.memory}}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
