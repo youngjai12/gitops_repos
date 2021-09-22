@@ -2,7 +2,7 @@
 kind: Deployment
 metadata:
   name: kafka-consumer-deployment
-  namespace: {{ .Values.namespace }}
+  namespace: default
 spec:
   selector:
     matchLabels:
