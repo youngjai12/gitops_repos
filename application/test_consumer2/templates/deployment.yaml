@@ -1,0 +1,25 @@
+]apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: kafka-consumer-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: kafka-consumer-app
+  replicas: {{.Values.replicaCount}}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: kafka-consumer-app
+    spec:
+      containers:
+        - name: kafka-consumer
+          image: youngjaikwon/kafka-consumer:test1
+          imagePullPolicy: {{.Values.image.pullPolicy}}
+          resources:
+            requests:
+              cpu: {{.Values.resources.requests.cpu}}
+              memory: {{.Values.resources.requests.memory}}
