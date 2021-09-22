@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: kafka-consumer
-          image: youngjaikwon/kafka-consumer:test1
+          image: docker.io/youngjaikwon/kafka-consumer:test1
           imagePullPolicy: {{.Values.image.pullPolicy}}
           resources:
             requests:
