@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kafka-consumer-deployment
@@ -17,3 +17,5 @@ spec:
         - name: kafka-consumer
           image: docker.io/youngjaikwon/kafka-consumer:test1
           imagePullPolicy: Always
+          command: ["python3"]
+          args: ["/engine/consumer_k8s.py", "--topicname" ,"test1", "--redishost", "198.19.157.154", "--kafkahost", "198.19.226.186:9092"]
