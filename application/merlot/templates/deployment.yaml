@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "merlot.fullname" . }}
+  labels:
+    {{- include "merlot.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deploy.selector.matchLabels.app}}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{.Values.deploy.selector.matchLabels.app}}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.deploy.containerPort}}
+          env:
+            - name: KAFKA_HOST
+              value: {{ .Values.deploy.env.kafkahost}}
+            - name: KAFKA_PORT
+              value: {{ .Values.deploy.env.kafkaport}}
+            - name: REDIS_HOST
+              value: {{ .Values.deploy.env.redishost}}
