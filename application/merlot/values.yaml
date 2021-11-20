@@ -72,7 +72,7 @@ ingress:
         - path: /api
           backend:
             serviceName: main-svc
-            servicePort: 8080
+            servicePort: 5000
   tls:
     - hosts:
         - juit.api.com
