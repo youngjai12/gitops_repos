@@ -17,9 +17,9 @@ deploy:
       app: merlot
   containerPort: 8000
   env:
-    kafkahost: "198.19.176.92"
-    kafkaport: "9094"
-    redishost: "198.19.160.202"
+    kafkahost: 198.19.176.92
+    kafkaport: 9094
+    redishost: 198.19.160.202
 
 
 
