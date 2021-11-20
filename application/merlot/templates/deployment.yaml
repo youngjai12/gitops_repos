@@ -1,13 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "merlot.fullname" . }}
-  labels:
-    {{- include "merlot.labels" . | nindent 4 }}
+  name: {{ .Values.deploy.name }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       app: {{ .Values.deploy.selector.matchLabels.app}}

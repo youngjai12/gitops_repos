@@ -11,6 +11,7 @@ image:
   tag: "test6"
 
 deploy:
+  name: merlotdeploy
   selector:
     matchLabels:
       app: merlot
