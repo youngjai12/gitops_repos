@@ -52,8 +52,9 @@ service:
   merlot:
     name: "merlot-svc"
     type: ClusterIP
-    port: 443
-    targetPort: 8080
+    port: 5000
+    targetPort: 8000
+    selector: merlot
 
 
 
