@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.deploy.name }}
+  name: {{ .Values.deploy.merlot.name }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.deploy.merlot.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.deploy.selector.matchLabels.app }}
+      app: {{ .Values.deploy.merlot.selector.matchLabels.app }}
   template:
     metadata:
       labels:
-        app: {{.Values.deploy.selector.matchLabels.app }}
+        app: {{.Values.deploy.merlot.selector.matchLabels.app }}
     spec:
       imagePullSecrets:
-        - name: {{ .Values.imagePullSecrets.secrets }}
+      - name: regcred
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.deploy.merlot.image.repository }}:{{ .Values.deploy.merlot.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.deploy.merlot.image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.deploy.containerPort }}
+            - containerPort: {{ .Values.deploy.merlot.containerPort }}
           env:
             - name: KAFKA_HOST
               value: "{{ .Values.deploy.env.kafkahost }}"

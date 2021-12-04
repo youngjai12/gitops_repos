@@ -2,29 +2,42 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+replicaCount:
+  merlot: 2
+  consumer: 40
 
-image:
-  repository: purple-registry.kr.ncr.ntruss.com/merlot
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: "dev1"
 
 imagePullSecrets:
-  secrets: regcred
+  - name: regcred
 
 
 deploy:
-  name: merlotdeploy
-  selector:
-    matchLabels:
-      app: merlot
-  containerPort: 8000
   env:
     kafkahost: 198.19.142.207
     kafkaport: 9092
     redishost: 198.19.234.103
+    mysql: dev.ceteris.co.kr
+    mysqlport: 10005
+    topicname: stocktest40
+  merlot:
+    name: merlotdeploy
+    replicaCount: 2
+    image:
+      repository: purple-registry.kr.ncr.ntruss.com/merlot
+      pullPolicy: IfNotPresent
+      tag: "dev1"
+    selector:
+      matchLabels:
+        app: merlot
+    containerPort: 8000
 
+  consumer:
+    name: stock-consumer
+    replicaCount: 40
+    image:
+      repository: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer
+      pullPolicy: Always
+      tag: "test7"
 
 
 #imagePullSecrets: []
@@ -77,6 +90,14 @@ ingress:
           backend:
             serviceName: merlot-svc
             servicePort: 5000
+        - path: /prometheus
+          backend:
+            serviceName: yj-prom-kube-prometheus-st-prometheus
+            servicePort: 9090
+        - path: /grafana
+          backend:
+            serviceName: yj-prom-grafana
+            servicePort: 80
 
   tls:
     - hosts:

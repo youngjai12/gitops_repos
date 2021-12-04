@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stock-consumer-deploy
+  name: {{ .Values.deploy.consumer.name}}
 spec:
-  replicas: 3
+  replicas: {{ .Values.deploy.consumer.replicaCount}}
   selector:
     matchLabels:
-      app: stock-consumer
+      app: {{ .Values.deploy.consumer.name}}
   template:
     metadata:
       labels:
-        app: stock-consumer
+        app: {{ .Values.deploy.consumer.name}}
     spec:
       imagePullSecrets:
-        - name: { { .Values.imagePullSecrets.secrets } }
+      - name: regcred
       containers:
-      - name: stock-consumer
-        image: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer:test7
-        imagePullPolicy: Always
+      - name: {{ .Values.deploy.consumer.name}}
+        image: "{{ .Values.deploy.consumer.image.repository }}:{{ .Values.deploy.consumer.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.deploy.consumer.image.pullPolicy }}
         env:
           - name: MYSQL_URL
-            value: "dev.ceteris.co.kr"
+            value: "{{ .Values.deploy.env.mysql }}"
           - name: MYSQL_PORT
-            value: "10005"
+            value: "{{ .Values.deploy.env.mysqlport }}"
           - name: KAFKA_HOST
-            value: "198.19.142.207"
+            value: "{{ .Values.deploy.env.kafkahost }}"
           - name: KAFKA_PORT
-            value: "9092"
+            value: "{{ .Values.deploy.env.kafkaport }}"
           - name: TOPIC_NAME
-            value: "stocktest1"
+            value: "{{ .Values.deploy.env.topicname }}"
           - name: REDIS_HOST
-            value: "198.19.234.103"
+            value: "{{ .Values.deploy.env.redishost }}"
