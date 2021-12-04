@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 10
+replicaCount: 1
 
 image:
   repository: youngjaikwon/merlot_dev
@@ -17,9 +17,9 @@ deploy:
       app: merlot
   containerPort: 8000
   env:
-    kafkahost: 198.19.176.92
-    kafkaport: 9094
-    redishost: 198.19.160.202
+    kafkahost: 198.19.142.207
+    kafkaport: 9092
+    redishost: 198.19.234.103
 
 
 
@@ -51,7 +51,7 @@ securityContext: {}
 
 service:
   merlot:
-    name: "merlot-svc"
+    name: merlot-svc
     type: ClusterIP
     port: 5000
     targetPort: 8000
@@ -71,15 +71,16 @@ ingress:
       paths:
         - path: /api
           backend:
-            serviceName: main-svc
+            serviceName: merlot-svc
             servicePort: 5000
+        - path: /grafana
+          backend:
+            serviceName: monitor
+
   tls:
     - hosts:
         - juit.api.com
       secretName: devtls
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
 
 
 
