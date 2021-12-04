@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stock-consumer-deploy
+spec:
+  replicas: 30
+  selector:
+    matchLabels:
+      app: stock-consumer
+  template:
+    metadata:
+      labels:
+        app: stock-consumer
+    spec:
+      containers:
+      - name: stock-consumer
+        image: docker.io/youngjaikwon/purple_consumer:test6
+        imagePullPolicy: Always
+        env:
+          - name: MYSQL_URL
+            value: "dev.ceteris.co.kr"
+          - name: MYSQL_PORT
+            value: "10005"
+          - name: KAFKA_HOST
+            value: "198.19.142.207"
+          - name: KAFKA_PORT
+            value: "9092"
+          - name: TOPIC_NAME
+            value: "stocktest1"
+          - name: REDIS_HOST
+            value: "198.19.234.103"
