@@ -12,6 +12,8 @@ spec:
       labels:
         app: stock-consumer
     spec:
+      imagePullSecrets:
+        - name: { { .Values.imagePullSecrets.secrets } }
       containers:
       - name: stock-consumer
         image: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer:test7
