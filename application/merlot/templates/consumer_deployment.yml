@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: stock-consumer-deploy
 spec:
-  replicas: 30
+  replicas: 3
   selector:
     matchLabels:
       app: stock-consumer
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: stock-consumer
-        image: docker.io/youngjaikwon/purple_consumer:test6
+        image: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer:test7
         imagePullPolicy: Always
         env:
           - name: MYSQL_URL
