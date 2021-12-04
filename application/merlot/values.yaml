@@ -13,9 +13,9 @@ imagePullSecrets:
 
 deploy:
   env:
-    kafkahost: 198.19.142.207
+    kafkahost: 198.19.248.153
     kafkaport: 9092
-    redishost: 198.19.234.103
+    redishost: 198.19.226.35
     mysql: dev.ceteris.co.kr
     mysqlport: 10005
     topicname: stocktest40
