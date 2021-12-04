@@ -10,6 +10,10 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "dev1"
 
+imagePullSecrets:
+  secrets: regcred
+
+
 deploy:
   name: merlotdeploy
   selector:
@@ -23,7 +27,7 @@ deploy:
 
 
 
-imagePullSecrets: []
+#imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 

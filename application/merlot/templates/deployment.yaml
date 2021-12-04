@@ -12,6 +12,8 @@ spec:
       labels:
         app: {{.Values.deploy.selector.matchLabels.app }}
     spec:
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets.secrets }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
