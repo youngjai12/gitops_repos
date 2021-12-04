@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: youngjaikwon/merlot_dev
+  repository: purple-registry.kr.ncr.ntruss.com/merlot
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "test6"
+  tag: "dev1"
 
 deploy:
   name: merlotdeploy
