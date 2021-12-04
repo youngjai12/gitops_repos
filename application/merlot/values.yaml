@@ -73,9 +73,6 @@ ingress:
           backend:
             serviceName: merlot-svc
             servicePort: 5000
-        - path: /grafana
-          backend:
-            serviceName: monitor
 
   tls:
     - hosts:
