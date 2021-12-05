@@ -23,9 +23,9 @@ deploy:
     name: merlotdeploy
     replicaCount: 2
     image:
-      repository: purple-registry.kr.ncr.ntruss.com/merlot
+      repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/merlot
       pullPolicy: IfNotPresent
-      tag: "dev1"
+      tag: "test2"
     selector:
       matchLabels:
         app: merlot
