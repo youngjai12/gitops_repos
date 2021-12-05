@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: verif-deploy
+spec:
+  replicas: {{ .Values.deploy.verif.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deploy.verif.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deploy.verif.name }}
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+      - name: {{ .Values.deploy.verif.name }}
+        image: "{{ .Values.deploy.verif.image.repository }}:{{ .Values.deploy.verif.image.tag | default .Chart.AppVersion }}"
+        ports:
+          - containerPort: {{ .Values.deploy.verif.containerPort }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.service.verif.name}}
+spec:
+  selector:
+    app: {{ .Values.service.verif.selector.app }}
+  ports:
+  - port: {{ .Values.service.verif.port }}
+    targetPort: {{ .Values.service.verif.targetPort }}

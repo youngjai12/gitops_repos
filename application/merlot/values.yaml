@@ -33,11 +33,27 @@ deploy:
 
   consumer:
     name: stock-consumer
-    replicaCount: 40
+    replicaCount: 10
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer
       pullPolicy: Always
       tag: "log1"
+  cert:
+    name: cert
+    replicaCount: 1
+    image:
+      repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/cert
+      pullPolicy: Always
+      tag: "test1"
+    containerPort: 8080
+  verif:
+    name: verif
+    replicaCount: 1
+    image:
+      repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/verif
+      pullPolicy: Always
+      tag: "test1"
+    containerPort: 8080
 
 
 #imagePullSecrets: []
@@ -73,8 +89,18 @@ service:
     port: 5000
     targetPort: 8000
     selector: merlot
-
-
+  cert:
+    name: cert-svc
+    port: 443
+    targetPort: 8080
+    selector:
+      app: cert
+  verif:
+    name: verif-svc
+    port: 442
+    targetPort: 8080
+    selector:
+      app: verif
 
 ingress:
   enabled: false
@@ -98,6 +124,14 @@ ingress:
           backend:
             serviceName: yj-prom-grafana
             servicePort: 80
+        - path: /verif
+          backend:
+            serviceName: verif-svc
+            servicePort: 442
+        - path: /cert
+          backend:
+            serviceName: cert-svc
+            servicePort: 443
 
   tls:
     - hosts:

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-deploy
+spec:
+  replicas: {{ .Values.deploy.cert.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deploy.cert.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deploy.cert.name }}
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+      - name: {{ .Values.deploy.cert.name }}
+        image: "{{ .Values.deploy.cert.image.repository }}:{{ .Values.deploy.cert.image.tag | default .Chart.AppVersion }}"
+        ports:
+          - containerPort: {{ .Values.deploy.cert.containerPort }}
