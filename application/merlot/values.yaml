@@ -23,7 +23,7 @@ deploy:
     name: merlotdeploy
     replicaCount: 2
     image:
-      repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/merlot
+      repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/merlot_kube
       pullPolicy: IfNotPresent
       tag: "test4"
     selector:
