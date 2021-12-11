@@ -19,6 +19,7 @@ deploy:
     mysql: dev.ceteris.co.kr
     mysqlport: 10005
     topicname: stocktest40
+    phase: dev
 
   merlot:
     name: merlotdeploy
@@ -26,7 +27,7 @@ deploy:
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/merlot_kube
       pullPolicy: IfNotPresent
-      tag: "test2"
+      tag: "dev1"
     selector:
       matchLabels:
         app: merlot

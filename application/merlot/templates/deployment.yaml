@@ -27,3 +27,5 @@ spec:
               value: "{{ .Values.deploy.env.kafkaport }}"
             - name: REDIS_HOST
               value: "{{ .Values.deploy.env.redishost }}"
+            - name: PHASE
+              value: "{{ .Values.deploy.dev.phase}}"
