@@ -28,4 +28,4 @@ spec:
             - name: REDIS_HOST
               value: "{{ .Values.deploy.env.redishost }}"
             - name: PHASE
-              value: "{{ .Values.deploy.dev.phase}}"
+              value: "{{.Values.deploy.env.phase}}"
