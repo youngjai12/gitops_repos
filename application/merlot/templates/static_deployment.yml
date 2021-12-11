@@ -6,11 +6,11 @@ spec:
   replicas: {{ .Values.deploy.static.replicaCount}}
   selector:
     matchLabels:
-      app: {{ .Values.deploy.static.name}}
+      app: {{.Values.deploy.static.selector.matchLabels.app }}
   template:
     metadata:
       labels:
-        app: {{ .Values.deploy.static.name}}
+        app: {{.Values.deploy.static.selector.matchLabels.app }}
     spec:
       imagePullSecrets:
       - name: regcred
@@ -19,4 +19,4 @@ spec:
         image: "{{ .Values.deploy.static.image.repository }}:{{ .Values.deploy.static.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.deploy.static.image.pullPolicy }}
         ports:
-          - containerPort: { { .Values.deploy.static.containerPort } }
+          - containerPort: {{.Values.deploy.static.containerPort}}

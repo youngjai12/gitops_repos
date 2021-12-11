@@ -33,8 +33,11 @@ deploy:
     containerPort: 8000
 
   static:
-    name: staic-deploy
+    name: static-deploy
     replicaCount: 1
+    selector:
+      matchLabels:
+        app: static-server
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/static_server
       pullPolicy: IfNotPresent
@@ -48,7 +51,7 @@ deploy:
       repository: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer
       pullPolicy: Always
       tag: "log1"
-      
+
   cert:
     name: cert
     replicaCount: 1
