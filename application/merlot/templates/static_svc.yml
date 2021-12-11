@@ -5,7 +5,7 @@ metadata:
 spec:
   ports:
   - port: {{ .Values.service.static.port }}
-    name: api
+    name: http
     targetPort: {{ .Values.service.static.targetPort }}
   selector:
     app: {{ .Values.service.static.selector.app }}

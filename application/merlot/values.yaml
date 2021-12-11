@@ -19,6 +19,7 @@ deploy:
     mysql: dev.ceteris.co.kr
     mysqlport: 10005
     topicname: stocktest40
+
   merlot:
     name: merlotdeploy
     replicaCount: 2
@@ -30,6 +31,7 @@ deploy:
       matchLabels:
         app: merlot
     containerPort: 8000
+
   static:
     name: staic-deploy
     replicaCount: 1
@@ -37,6 +39,7 @@ deploy:
       repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/static_server
       pullPolicy: IfNotPresent
       tag: "test1"
+    containerPort: 80
 
   consumer:
     name: stock-consumer
@@ -45,6 +48,7 @@ deploy:
       repository: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer
       pullPolicy: Always
       tag: "log1"
+      
   cert:
     name: cert
     replicaCount: 1
