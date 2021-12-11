@@ -132,6 +132,10 @@ ingress:
           backend:
             serviceName: cert-svc
             servicePort: 443
+        - path: /static
+          backend:
+            serviceName: static-svc
+            servicePort: 4999
 
   tls:
     - hosts:
