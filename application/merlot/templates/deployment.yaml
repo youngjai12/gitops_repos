@@ -29,3 +29,5 @@ spec:
               value: "{{ .Values.deploy.env.redishost }}"
             - name: PHASE
               value: "{{.Values.deploy.env.phase}}"
+            - name: TOPIC_NAME
+              value: "{{.Values.deploy.env.topicname}}"
