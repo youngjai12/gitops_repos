@@ -101,6 +101,12 @@ service:
     targetPort: 8080
     selector:
       app: verif
+  static:
+    name: static-svc
+    port: 4999
+    targetPort: 80
+    selector:
+      app: static-server
 
 ingress:
   enabled: false
