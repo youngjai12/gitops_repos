@@ -18,5 +18,4 @@ spec:
       - name: {{ .Values.deploy.static.name}}
         image: "{{ .Values.deploy.static.image.repository }}:{{ .Values.deploy.static.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.deploy.static.image.pullPolicy }}
-        ports:
-          - containerPort: { { .Values.deploy.static.containerPort } }
+      
