@@ -30,6 +30,13 @@ deploy:
       matchLabels:
         app: merlot
     containerPort: 8000
+  static:
+    name: staic-deploy
+    replicaCount: 1
+    image:
+      repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/static_server
+      pullPolicy: IfNotPresent
+      tag: "test1"
 
   consumer:
     name: stock-consumer

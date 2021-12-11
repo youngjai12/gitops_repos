@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deploy.static.name}}
+spec:
+  replicas: {{ .Values.deploy.static.replicaCount}}
+  selector:
+    matchLabels:
+      app: {{ .Values.deploy.static.name}}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deploy.static.name}}
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: {{ .Values.deploy.static.name}}
+        image: "{{ .Values.deploy.static.image.repository }}:{{ .Values.deploy.static.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.deploy.static.image.pullPolicy }}
+        ports:
+          - containerPort: { { .Values.deploy.static.containerPort } }
