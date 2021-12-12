@@ -27,7 +27,7 @@ deploy:
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/merlot_kube
       pullPolicy: IfNotPresent
-      tag: "log1"
+      tag: "log2"
     selector:
       matchLabels:
         app: merlot
