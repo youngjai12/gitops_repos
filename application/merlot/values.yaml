@@ -57,7 +57,7 @@ deploy:
     name: cert
     replicaCount: 1
     image:
-      repository: purple-registry.kr.ncr.ntruss.com/youngai_kwon/cert
+      repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/cert
       pullPolicy: Always
       tag: "test1"
     containerPort: 8080
