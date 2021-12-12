@@ -51,13 +51,13 @@ deploy:
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer
       pullPolicy: Always
-      tag: "log1"
+      tag: "log2"
 
   cert:
     name: cert
     replicaCount: 1
     image:
-      repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/cert
+      repository: purple-registry.kr.ncr.ntruss.com/youngai_kwon/cert
       pullPolicy: Always
       tag: "test1"
     containerPort: 8080
