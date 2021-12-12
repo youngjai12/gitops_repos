@@ -23,7 +23,7 @@ deploy:
 
   merlot:
     name: merlotdeploy
-    replicaCount: 2
+    replicaCount: 1
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/merlot_kube
       pullPolicy: IfNotPresent
@@ -47,7 +47,7 @@ deploy:
 
   consumer:
     name: stock-consumer
-    replicaCount: 10
+    replicaCount: 2
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer
       pullPolicy: Always
