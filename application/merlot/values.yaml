@@ -27,7 +27,7 @@ deploy:
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/merlot_kube
       pullPolicy: IfNotPresent
-      tag: "real2"
+      tag: "real3"
     selector:
       matchLabels:
         app: merlot
