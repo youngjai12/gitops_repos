@@ -131,7 +131,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: juit.api.com
+    - host: purpleapp.co.kr
       paths:
         - path: /api
           backend:
@@ -160,8 +160,8 @@ ingress:
 
   tls:
     - hosts:
-        - juit.api.com
-      secretName: devtls
+        - purpleapp.co.kr
+      secretName: purpletls
 
 
 
