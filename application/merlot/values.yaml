@@ -160,8 +160,8 @@ ingress:
 
   tls:
     - hosts:
-        - cert.purpleapp.co.kr
-      secretName: purpletls
+        - dev.ceteris.co.kr
+      secretName: devtls
 
 
 
