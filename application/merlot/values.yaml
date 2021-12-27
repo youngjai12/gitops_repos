@@ -16,7 +16,7 @@ deploy:
     kafkahost: 198.19.248.153
     kafkaport: 9092
     redishost: 198.19.226.35
-    mysql: dev.ceteris.co.kr
+    mysql: 211.218.9.11
     mysqlport: 10005
     topicname: stocktest40
     phase: dev
