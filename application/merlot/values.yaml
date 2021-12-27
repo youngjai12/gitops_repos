@@ -131,7 +131,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: cert.purpleapp.co.kr
+    - host: dev.ceteris.co.kr
       paths:
         - path: /api
           backend:
