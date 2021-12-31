@@ -47,7 +47,7 @@ deploy:
 
   consumer:
     name: stock-consumer
-    replicaCount: 2
+    replicaCount: 6
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer
       pullPolicy: Always
