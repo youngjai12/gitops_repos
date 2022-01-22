@@ -42,16 +42,16 @@ deploy:
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjai_kwon/static_server
       pullPolicy: IfNotPresent
-      tag: "test1"
+      tag: "event1"
     containerPort: 80
 
   consumer:
     name: stock-consumer
-    replicaCount: 4
+    replicaCount: 10
     image:
       repository: purple-registry.kr.ncr.ntruss.com/youngjaikwon/purple_consumer
       pullPolicy: Always
-      tag: "manual_start1"
+      tag: "real3"
 
   cert:
     name: cert
@@ -157,11 +157,18 @@ ingress:
           backend:
             serviceName: static-svc
             servicePort: 4999
+    - host: event.juit.co.kr
+      paths:
+        - path: /
+
 
   tls:
     - hosts:
         - dev.ceteris.co.kr
       secretName: devtls
+    - hosts:
+        - event.juit.co.kr
+      secretName: eventtls
 
 
 
