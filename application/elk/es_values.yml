@@ -1,0 +1,57 @@
+
+replicas: 3
+minimumMasterNodes: 2
+
+
+esJavaOpts: "" # example: "-Xmx1g -Xms1g"
+
+image: "docker.elastic.co/elasticsearch/elasticsearch"
+imageTag: "8.0.0-SNAPSHOT"
+imagePullPolicy: "IfNotPresent"
+
+
+roles:
+  - master
+  - data
+  - data_content
+  - data_hot
+  - data_warm
+  - data_cold
+  - ingest
+
+esConfig:
+  elasticsearch.yml: |
+    xpack.security.enabled: false
+
+secret:
+  enabled: true
+  password: "youngjai"
+
+
+resources:
+  requests:
+    cpu: "700m"
+    memory: "2Gi"
+  limits:
+    cpu: "700m"
+    memory: "2Gi"
+
+protocol: http
+httpPort: 9200
+transportPort: 9300
+
+service:
+  enabled: true
+  labels: {}
+  labelsHeadless: {}
+  type: ClusterIP
+  nodePort: ""
+  annotations: {}
+  httpPortName: http
+  transportPortName: transport
+  loadBalancerIP: ""
+  loadBalancerSourceRanges: []
+  externalTrafficPolicy: ""
+
+updateStrategy: RollingUpdate
+

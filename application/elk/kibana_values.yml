@@ -1,0 +1,11 @@
+elasticsearchHosts: "http://198.19.238.218:9200"
+
+replicas: 1
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "2Gi"
+  limits:
+    cpu: "500m"
+    memory: "2Gi"
