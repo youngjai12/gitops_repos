@@ -9,31 +9,24 @@ replicas: 1
 logstashPipeline:
   logstash.conf: |
     input {
-#      tcp {
-#        port => 5057
-#        type => "logstash_log"
-#        codec => multiline{
-#                        pattern => "^%{TIMESTAMP_ISO8601}"
-#                        negate => "true"
-#                        what => "previous"
-#                }
-#      }
       beats {
+        type => "filebeat_log"
         port => 5057
       }
     }
 
-#    filter{
-#      if [type] == "logstash_log" {
-#        grok {
-#          match => {
-#            "message" => ["^(?m)%{TIMESTAMP_ISO8601:timestamp} \[%{DATA:loglevel}\] \[%{DATA:file}\:%{NUMBER:line}\] >> (?<msg>[a-zA-Z\r\n\t\s/\[\]\(\):\"=\.\d\-\,_\*\'\{\}\?!\@#$\%^<>]*)"]
-#          }
-#          remove_field => ["@{event.original}", "@{message}", "@{file.keyword}", "@{apiname.keyword}", "@{line.keyword}"]
-#        }
-#      }
-#
-#    }
+    filter{
+      if [type] == "filebeat_log" {
+        grok {
+          match => {
+            "message" => ["%{TIMESTAMP_ISO8601:timestamp} \[%{DATA:loglevel}\] \[%{DATA:file}\:%{NUMBER:line}\] >> (?<msg>[a-zA-Z\r\n\t\s/\[\]\(\):\"=\.\d\-\,_\*\'\{\}\?!\@#$\%^<>]*)"]
+          }
+        }
+        mutate {
+          remove_field => ["[agent][keyword]", "[agent][type]", "[agent][version]", "[agent][name]", "[agent][ephemeral_id]", "[agent][id]", "[ecs][version]", "[container][id]", "[host][name]", "[event][original]", "[container][image][name]" ,"[container][runtime]" ]
+        }
+      }
+    }
 
     output {
       elasticsearch {
