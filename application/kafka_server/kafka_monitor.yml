@@ -1,0 +1,9 @@
+metrics:
+  kafka:
+    enabled: true
+  jmx:
+    enabled: true
+  serviceMonitor:
+    enabled: true
+    labels:
+      release: juit-prometheus
