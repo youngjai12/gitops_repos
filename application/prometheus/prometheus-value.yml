@@ -1,0 +1,91 @@
+defaultRules:
+  create: false
+manager:
+  enabled: true
+  service:
+    type: NodePort
+    nodePort: 30903
+  managerSpec:
+    nodeSelector:
+      monitoring: enabled
+grafana:
+  enabled: false
+kubeApiServer:
+  enabled: true
+  serviceMonitor:
+    namespaceSelector:
+      matchNames:
+      - default
+kubeEtcd:
+  enabled: true
+  endpoints:
+    - 192.168.30.13
+    - 192.168.30.14
+    - 192.168.30.15
+  serviceMonitor:
+    scheme: https
+    insecureSkipVerify: false
+    serverName: localhost
+    caFile: /etc/prometheus/secrets/etcd-client-cert/etcd-ca
+    certFile: /etc/prometheus/secrets/etcd-client-cert/etcd-client
+    keyFile: /etc/prometheus/secrets/etcd-client-cert/etcd-client-key
+kubeStateMetrics:
+  enabled: false
+nodeExporter:
+  enabled: false
+prometheusOperator:
+  enabled: false
+  serviceMonitor:
+    selfMonitor: true
+prometheus:
+  enabled: true
+  service:
+    type: NodePort
+  # Service for thanos service discovery on sidecar
+  # Enable this can make Thanos Query can use
+  # `--store=dnssrv+_grpc._tcp.${kube-prometheus-stack.fullname}-thanos-discovery.${namespace}.svc.cluster.local` to discovery
+  # Thanos sidecar on prometheus nodes
+  # (Please remember to change ${kube-prometheus-stack.fullname} and ${namespace}. Not just copy and paste!)
+  thanosService:
+    enabled: false
+    annotations: {}
+    labels: {}
+    portName: grpc
+    port: 10901
+    targetPort: "grpc"
+  thanosIngress:
+    enabled: false
+    type: NodePort
+    nodePort: 30901
+  prometheusSpec:
+    externalLabels:
+      cluster: k1
+    nodeSelector:
+      monitoring: enabled
+    secrets:
+      - etcd-client-cert
+    ruleNamespaceSelector:
+      matchLabels:
+        name: prometheus
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorNamespaceSelector:
+      matchLabels:
+        name: prometheus
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorNamespaceSelector:
+      matchLabels:
+        name: prometheus
+    podMonitorSelectorNilUsesHelmValues: false
+    retention: 10d
+    replicas: 1
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: rbd
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+    ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#thanosspec
+    thanos:
+      version: v0.18.0

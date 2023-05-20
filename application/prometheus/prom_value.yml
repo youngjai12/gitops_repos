@@ -1,0 +1,21 @@
+
+
+prometheus:
+  service:
+    type: NodePort
+  prometheusSpec:
+    serviceMonitorSelector:
+      matchLabels:
+        release: juit-dev-prom-test
+    podMonitorSelector:
+      matchLabels:
+        release: juit-dev-prom-test
+    probeSelector:
+      matchLabels:
+        release: juit-dev-prom-test
+
+
+grafana:
+  serviceMonitor:
+    interval: "30s"
+    selfMonitor: true
